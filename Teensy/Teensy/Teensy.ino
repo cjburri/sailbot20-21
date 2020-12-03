@@ -5,25 +5,26 @@
  * @brief File containing the execution code for the teensy embedded within the adjustable trim tab
  * @version 0.2
  * @date 2020-11-18
- * @copyright Copyright (c) 2020 
+ * @copyright Copyright (c) 2020
+ * @TODO: see if any of these variables can be moved into the constants file 
  */
 
-// Programmer defined files
+/* programmer defined files */
 #include "TrimTabMessages.pb.h"
 #include "Constants.h"
 
-// Libraries
+/* libraries */
 #include <WiFiEsp.h>                          //driver code for ESP8266 module
 #include "SoftwareSerial.h"                   //driver code for converting ESP8266 to Serial output
 #include <Servo.h>                            //driver code for operating servo
 #include <IPAddress.h>                        //library to assist in IP addressing (primarily to connect the teensy to the Jetson)
 #include <ArduinoJson.h>                      //library to assist in the serialization and deserialization of JSON documents
 
-// ESP8266 buffers 
+/* requests and response buffers */
 uint8_t rx_buffer[32];                        // receive buffer
 unsigned char tx_buffer[32];                  // transmission buffer
 
-// Wifi variables
+/* Wifi variables */
 SoftwareSerial ESPSerial(RX2pin, TX2pin);     // RX2, TX2
 char ssid[] = "sailbothot";                   // Name of the hull network
 char pass[] = "salad123";                     // Password to hull network
@@ -32,7 +33,7 @@ WiFiEspClient client;                         // communication between jetson se
 bool connection = false;                      // connection indicator
 volatile int count = 0;                       // count to have leds blink
 
-// Control variables
+/* Control variables */
 volatile int ledState = LOW;
 volatile unsigned long blinkCount = 0;        // use volatile for shared variables
 volatile int vIn = 0;                         // Battery voltage
@@ -45,6 +46,7 @@ volatile float windAngle;                     // Mapped reading from wind direct
 volatile int32_t control_angle;
 bool readingNow = false;
 
+/* IP Address for the Jetson Nano*/
 IPAddress testAddr = IPAddress(10,42,0,1);
 
 int timeSinceLastComm = 0;
@@ -82,28 +84,41 @@ void setup()
 void loop()
 {
   vIn = analogRead(vInPin);
-  simpleSendReceive();
+  JetsonSendReceive();
 }
 
-void simpleSendReceive()
+/** 
+ * @author  Connor Burri
+ * @brief   Reads incoming messages from Jetson Nano and transmits messages to Jetson Nano; uses JSON
+ * @details Writes the relative wind angle direction to the sail to the Jetson Nano over a socket connection
+ *          then it receives a command from the Jetson Nano. This write/read command cycles repeatedly as long
+ *          as there is a connection over the socket. If no connection is found then there will be an attempt to 
+ *          reconnect the Teensy to the Jetson Nano.
+ */
+void JetsonSendReceive()
 {
+   // ensure that a connection is bridged before attempting to read or write
   if (!connection)
   {
     client.stop();
     establishConnection();
-  } else {
+  } 
+  // alternate between writing data to the jetson and reading data from the jetson 
+  else {
     if(!readingNow){
       writeJson();
     }
     if(readingNow){
       readJson();
-    }3
+    }
   }
   delay(3000);
 }
 
-/* 
- * @author Connor Burri
+/** 
+ * @author  Connor Burri
+ * @brief   Reads in data from ESP8266 and deserializes data into a JSON
+ * @bug     JSON objects requires a lot of memory (relative); not a pressing issue but still something to keep in mind
  */
 void readJson(){
   // determines if there is data available to receive
@@ -152,6 +167,11 @@ void readJson(){
     timeSinceLastComm = millis();
 }
 
+/** 
+ * @author  Connor Burri
+ * @brief   writes data in JSON string format to Jetson using ESP8266 interface
+ * @bug     JSON objects requires a lot of memory (relative); not a pressing issue but still something to keep in mind
+ */
 void writeJson(){
   //prepare the JSON document
   DynamicJsonDocument json(256);
@@ -192,7 +212,10 @@ void writeJson(){
   }
 }
 
-
+/**
+ * @author Irina Lavryonova
+ * @brief establishes a connection between the Teensy and Jetson Nano
+ */
 void establishConnection()
 {
   // check for the presence of the shield
@@ -231,6 +254,10 @@ void establishConnection()
   retryCount = 0;
 }
 
+/**
+ * @author Irina Lavryonova
+ * @brief Ends the connection between Teensy and Jetson Nano and attempts to reconnect
+ */
 void clearConnection()
 {
   WiFi.disconnect();
@@ -238,8 +265,9 @@ void clearConnection()
 }
 
 /**
+ * @author Irina Lavryonova
  * @brief Sets the angle of the servo based on the angle of attack read from the encoder at the front
- * 
+ * @TODO: send this state to the telemetry interface
  */
 void servoControl()
 {
@@ -311,6 +339,11 @@ void servoControl()
   }
 }
 
+/**
+ * @author Irina Lavryonova
+ * @brief controls the blinking operations within the LEDS
+ * @TODO: send this state to the telemetry interface
+ */ 
 void blinkState()
 {
   // Toggle state
@@ -360,18 +393,48 @@ void blinkState()
   }
 }
 
+/**
+ * @author Irina Lavryonova
+ * @author Connor Burri
+ * @brief Prints the status of the connection between the Teensy and Jetson Nano
+ */
 void printWifiStatus()
 {
   // print the SSID of the network you're attached to
   Serial.print("SSID: ");
   Serial.println(WiFi.SSID());
+  
   // print your WiFi shield's IP address
   IPAddress ip = WiFi.localIP();
   Serial.print("IP Address: ");
   Serial.println(ip);
+  
   // print the received signal strength
-  long rssi = WiFi.RSSI();
-  Serial.print("Signal strength (RSSI):");
-  Serial.print(rssi);
+  printSignalIndication(WiFi.RSSI());
+}
+
+/**
+ * @author Connor Burri
+ * @brief prints the signal strength in a human understandable way
+ * @TODO: get this data over to the jetson for telemetry interface
+ */
+void printSignalIndication(long signalStrength){
+  Serial.print("Signal strength (RSSI): ");
+  Serial.print(signalStrength);
+  if(signalStrength > -30){
+    Serial.print(" (Amazing)");
+  }
+  else if(signalStrength > -67){
+    Serial.print(" (Very Good)");
+  }
+  else if(signalStrength > -70){
+    Serial.print(" (Okay)");
+  }
+  else if(signalStrength > -80){
+    Serial.print(" (Not Good)");
+  }
+  else{
+    Serial.print(" (Nearly Unusable)");
+  }
   Serial.println(" dBm");
 }
