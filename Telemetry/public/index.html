@@ -21,6 +21,7 @@
   <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAqEpMAFofxAxfTmpXh_u_vNm0VDSQ-VqE"></script>
   <script type="text/javascript" src="/js/dependencies/d3.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="/js/dependencies/d3gauge.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/dependencies/FileSaver.min.js" charset="utf-8"></script>
 
   <!-- Componenents -->
   <script type="text/javascript" src="js/pitchrollGen.js"></script>
@@ -38,7 +39,19 @@
   <div>
     <div id="map-container">
       <div id="mapCanvas"></div>
-      <input type="checkbox" id="myCheck" onclick="toggleDebug()">
+      <div id="options">
+        <input type="checkbox" id="myCheck" class="horiList" onclick="toggleDebug()">
+        <h4 class="horiList">Debug Mode</h4>
+        <h4 class="horiList" style="margin-left: 20px;">Map Center:</h4>
+        <input class="horiList" type="text" id="center" style="width: 150px; display: inline-block;" value="42.8489,-70.9829">
+        <h4 class="horiList" style="margin-left: 20px;">Grid Corners:</h4>
+        <input class="horiList" type="text" id="gridTL" style="width: 150px; display: inline-block;" value="42.85414938719151, -70.98833200038395">
+        <input class="horiList" type="text" id="gridBL" style="width: 150px; display: inline-block;" value="42.84417554052568, -70.98833200038395">
+        <input class="horiList" type="text" id="gridTR" style="width: 150px; display: inline-block;" value="42.84401759443596, -70.97532473965633">
+        <input class="horiList" type="text" id="gridBR" style="width: 150px; display: inline-block;" value="42.85367747491202, -70.97532473965633">
+        <button type="button" onclick="parseInps()">Submit</button>
+        <button type="button" onclick="exportFile()">Export File</button>
+      </div>
     </div>
 
     <div class="grid-container fluid">
