@@ -30,17 +30,6 @@ class SerialChannels:
 		self.frame_error = 0
 		self.failsafe = 0
 
-SerialChannels = SerialChannels()
-
-
-try:
-
-	while True:
-		recieve()
-		print('\t'.join("%i: %s" % (index, value) for index, value in enumerate(SerialChannels.channels)))
-
-except KeyboardInterrupt:
-    print("Exiting Program")
 
 def recieve():
 	data = None
@@ -104,4 +93,18 @@ def decodeSBUS():
 
 	return true
 
+
+
+
+SerialChannels = SerialChannels()
+
+
+try:
+
+	while True:
+		recieve()
+		print('\t'.join("%i: %s" % (index, value) for index, value in enumerate(SerialChannels.channels)))
+
+except KeyboardInterrupt:
+    print("Exiting Program")
 
