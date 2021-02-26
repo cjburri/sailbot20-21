@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import time
 import serial
+import binascii
 
 BUFFER_LENGTH = 25
 CHANNELS = 18
@@ -32,44 +33,48 @@ class SerialChannels:
 
 
 def recieve():
-	data = None
+	global bufferOffset, buffer
+	data = 0
 	counter = 0
 
-	while ((JetsonSerial.in_waiting) and (offset < BUFFER_LENGTH) and (counter < MAX_READ_ATTEMPTS)):
-		data = JetsonSerial.read()
-
-		if (offset == 0 and data != 0x0f):
+	while ((JetsonSerial.in_waiting) and (bufferOffset < BUFFER_LENGTH) and (counter < MAX_READ_ATTEMPTS)):
+		data = int(JetsonSerial.read().hex(), 16)
+	#	print(data, end=', ')
+		if (bufferOffset == 0 and data != 0x0f):
 			continue
+		buffer.append(data & 0xff)
+		bufferOffset += 1
+#	print(bufferOffset)
 
-		buffer[offset] = (data & 0xff)
-		offset += 1
-
-	if (offset == BUFFER_LENGTH):
+	if (bufferOffset == BUFFER_LENGTH):
+		print('decoding')
 		if decodeSBUS():
-			if SerialChannels.failsafe:
-				print("Idk this wasn't in the manual")
-			if SerialChannels.frame_error:
-				print("Idk this wasn't in the manual")
+			if serialData.failsafe:
+				print("Failsafe failed")
+			if serialData.frame_error:
+				print("Frame error")
 
-			if SerialChannels.failsafe or SerialChannels.frame_error:
+			if serialData.failsafe or serialData.frame_error:
 				print("Successful decode")
 
 
 
 	buffer = []
-	offset = 0
+	bufferOffset = 0
 
 def decodeSBUS():
-
+	global buffer, serialData
+#	print('started decoding')
 	if (buffer[0] != 0x0f):
-		return false
 		print("Incorrect start bit")
+		return False
 	if (buffer[BUFFER_LENGTH - 1] != 0x00):
-		return false
 		print("Incorrect stop bit")
-
-	SerialChannels.channels = []
-	dataChannels = SerialChannels.channels
+		return False
+	#print("good bit")
+	#print(buffer)
+	serialData.channels = []
+	dataChannels = serialData.channels
 
 	dataChannels.append((buffer[1] | buffer[2] << 8) & 0x07FF) # Channel 0
 	dataChannels.append((buffer[2] >> 3 | buffer[3] << 5) & 0x07FF) # Channel 1
@@ -88,23 +93,24 @@ def decodeSBUS():
 	dataChannels.append((buffer[20] >> 2 | buffer[21] << 6) & 0x07FF) # Channel 14
 	dataChannels.append((buffer[21] >> 5 | buffer[22] << 3) & 0x07FF) # Channel 15
 
-	SerialChannels.frame_error = (buffer[23] & (1 << 2)) != 0
-	SerialChannels.failsafe = (buffer[23] & (1 << 3)) != 0
+	serialData.frame_error = (buffer[23] & (1 << 2)) != 0
+	serialData.failsafe = (buffer[23] & (1 << 3)) != 0
 
-	return true
-
-
+	return True
 
 
-SerialChannels = SerialChannels()
+
+
+serialData = SerialChannels()
 
 
 try:
 
 	while True:
 		recieve()
-		print('\t'.join("%i: %s" % (index, value) for index, value in enumerate(SerialChannels.channels)))
-
+		print(serialData.channels)
+		#print(' '.join('%i: %s' % (index, value) for index, value in enumerate(serialData.channels)))
+		time.sleep(0.25)
 except KeyboardInterrupt:
     print("Exiting Program")
 
