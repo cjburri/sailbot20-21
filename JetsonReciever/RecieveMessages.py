@@ -14,7 +14,7 @@ print("Recieve and decode X6R Inverted SBUS Signal")
 
 JetsonSerial = serial.Serial(
     port="/dev/ttyTHS1", # RX terminal THS1 (Port 10 on J41 Header)
-    baudrate=100000,
+    baudrate=91000,
     bytesize=serial.EIGHTBITS,
     parity=serial.PARITY_EVEN,
     stopbits=serial.STOPBITS_TWO,
@@ -36,18 +36,20 @@ def recieve():
 	global bufferOffset, buffer
 	data = 0
 	counter = 0
-
+	
 	while ((JetsonSerial.in_waiting) and (bufferOffset < BUFFER_LENGTH) and (counter < MAX_READ_ATTEMPTS)):
+		#print(JetsonSerial.in_waiting)
 		data = int(JetsonSerial.read().hex(), 16)
-	#	print(data, end=', ')
+		#print(data, end=', ')
 		if (bufferOffset == 0 and data != 0x0f):
+			data = 0
 			continue
 		buffer.append(data & 0xff)
 		bufferOffset += 1
-#	print(bufferOffset)
 
 	if (bufferOffset == BUFFER_LENGTH):
-		print('decoding')
+		JetsonSerial.reset_input_buffer()
+		
 		if decodeSBUS():
 			if serialData.failsafe:
 				print("Failsafe failed")
@@ -59,7 +61,7 @@ def recieve():
 
 
 
-	buffer = []
+	buffer.clear()
 	bufferOffset = 0
 
 def decodeSBUS():
@@ -105,11 +107,9 @@ serialData = SerialChannels()
 
 
 try:
-
 	while True:
 		recieve()
-		print(serialData.channels)
-		#print(' '.join('%i: %s' % (index, value) for index, value in enumerate(serialData.channels)))
+		print(' '.join('%i: %s' % (index, value) for index, value in enumerate(serialData.channels)))
 		time.sleep(0.25)
 except KeyboardInterrupt:
     print("Exiting Program")
