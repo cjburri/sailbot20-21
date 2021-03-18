@@ -1,0 +1,42 @@
+[0.000000] (-) TimerEvent: {}
+[0.002665] (sailbot) JobQueued: {'identifier': 'sailbot', 'dependencies': OrderedDict()}
+[0.002779] (sailbot) JobStarted: {'identifier': 'sailbot'}
+[0.098296] (-) TimerEvent: {}
+[0.198731] (-) TimerEvent: {}
+[0.231452] (sailbot) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/sailbot', 'build', '--build-base', '/home/luke/sailbot20-21/sailbot_ws/build/sailbot/build', 'install', '--prefix', '/home/luke/sailbot20-21/sailbot_ws/install/sailbot', '--record', '/home/luke/sailbot20-21/sailbot_ws/build/sailbot/install.log', '--single-version-externally-managed'], 'cwd': '/home/luke/sailbot20-21/sailbot_ws/src/sailbot', 'env': {'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'luke', 'TEXTDOMAIN': 'im-config', 'XDG_SEAT': 'seat0', 'SSH_AGENT_PID': '903', 'XDG_SESSION_TYPE': 'x11', 'LD_LIBRARY_PATH': '/opt/ros/dashing/opt/yaml_cpp_vendor/lib:/opt/ros/dashing/opt/rviz_ogre_vendor/lib:/opt/ros/dashing/lib', 'SHLVL': '1', 'OLDPWD': '/home/luke/sailbot20-21/sailbot_ws/launch', 'QT4_IM_MODULE': 'xim', 'HOME': '/home/luke', 'DESKTOP_SESSION': 'ubuntu', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'COLCON_PREFIX_PATH': '/home/luke/sailbot20-21/sailbot_ws/install', 'IM_CONFIG_PHASE': '2', 'ROS_DISTRO': 'dashing', 'LOGNAME': 'luke', 'GTK_IM_MODULE': 'ibus', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'USERNAME': 'luke', 'XDG_SESSION_ID': '1', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '1', 'PATH': '/opt/ros/dashing/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'SESSION_MANAGER': 'local/luke-VirtualBox:@/tmp/.ICE-unix/808,unix/luke-VirtualBox:/tmp/.ICE-unix/808', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/7dc10ad0_70ad_4ade_bea3_a93428407d21', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XMODIFIERS': '@im=ibus', 'GNOME_TERMINAL_SERVICE': ':1.70', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'AMENT_PREFIX_PATH': '/home/luke/sailbot20-21/sailbot_ws/install/sailbot:/opt/ros/dashing', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'TEXTDOMAINDIR': '/usr/share/locale/', 'GJS_DEBUG_OUTPUT': 'stderr', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'XDG_VTNR': '1', 'QT_IM_MODULE': 'xim', 'PWD': '/home/luke/sailbot20-21/sailbot_ws/build/sailbot', 'CLUTTER_IM_MODULE': 'xim', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'PYTHONPATH': '/home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/python3.6/site-packages:/home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/python3.6/site-packages:/opt/ros/dashing/lib/python3.6/site-packages', 'COLCON': '1', 'VTE_VERSION': '5202'}, 'shell': False}
+[0.381591] (-) TimerEvent: {}
+[0.482801] (-) TimerEvent: {}
+[0.585675] (-) TimerEvent: {}
+[0.686825] (-) TimerEvent: {}
+[0.713400] (sailbot) StdoutLine: {'line': b'running egg_info\n'}
+[0.721171] (sailbot) StdoutLine: {'line': b'writing ../../build/sailbot/sailbot.egg-info/PKG-INFO\n'}
+[0.725846] (sailbot) StdoutLine: {'line': b'writing dependency_links to ../../build/sailbot/sailbot.egg-info/dependency_links.txt\n'}
+[0.726140] (sailbot) StdoutLine: {'line': b'writing entry points to ../../build/sailbot/sailbot.egg-info/entry_points.txt\n'}
+[0.726642] (sailbot) StdoutLine: {'line': b'writing requirements to ../../build/sailbot/sailbot.egg-info/requires.txt\n'}
+[0.728283] (sailbot) StdoutLine: {'line': b'writing top-level names to ../../build/sailbot/sailbot.egg-info/top_level.txt\n'}
+[0.787678] (-) TimerEvent: {}
+[0.889896] (-) TimerEvent: {}
+[0.992925] (-) TimerEvent: {}
+[1.030189] (sailbot) StdoutLine: {'line': b"reading manifest file '../../build/sailbot/sailbot.egg-info/SOURCES.txt'\n"}
+[1.041439] (sailbot) StdoutLine: {'line': b"writing manifest file '../../build/sailbot/sailbot.egg-info/SOURCES.txt'\n"}
+[1.042483] (sailbot) StdoutLine: {'line': b'running build\n'}
+[1.042586] (sailbot) StdoutLine: {'line': b'running build_py\n'}
+[1.042669] (sailbot) StdoutLine: {'line': b'running install\n'}
+[1.043482] (sailbot) StdoutLine: {'line': b'running install_lib\n'}
+[1.071235] (sailbot) StdoutLine: {'line': b'running install_data\n'}
+[1.093180] (-) TimerEvent: {}
+[1.093900] (sailbot) StdoutLine: {'line': b'creating /home/luke/sailbot20-21/sailbot_ws/install/sailbot/share/sailbot/launch\n'}
+[1.094387] (sailbot) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.129768] (sailbot) StdoutLine: {'line': b"removing '/home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/python3.6/site-packages/sailbot-0.0.0-py3.6.egg-info' (and everything under it)\n"}
+[1.146417] (sailbot) StdoutLine: {'line': b'Copying ../../build/sailbot/sailbot.egg-info to /home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/python3.6/site-packages/sailbot-0.0.0-py3.6.egg-info\n'}
+[1.171744] (sailbot) StdoutLine: {'line': b'running install_scripts\n'}
+[1.193399] (-) TimerEvent: {}
+[1.289482] (sailbot) StdoutLine: {'line': b'Installing control_system script to /home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/sailbot\n'}
+[1.294349] (-) TimerEvent: {}
+[1.294809] (sailbot) StdoutLine: {'line': b'Installing pin_io script to /home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/sailbot\n'}
+[1.295689] (sailbot) StdoutLine: {'line': b"writing list of installed files to '/home/luke/sailbot20-21/sailbot_ws/build/sailbot/install.log'\n"}
+[1.318441] (sailbot) CommandEnded: {'returncode': 0}
+[1.394721] (-) TimerEvent: {}
+[1.529340] (-) TimerEvent: {}
+[1.565516] (sailbot) JobEnded: {'identifier': 'sailbot', 'rc': 0}
+[1.567454] (-) EventReactorShutdown: {}

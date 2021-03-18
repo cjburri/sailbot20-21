@@ -1,0 +1,23 @@
+[0.251s] Invoking command in '/home/luke/sailbot20-21/sailbot_ws/src/sailbot': PYTHONPATH=/home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/sailbot build --build-base /home/luke/sailbot20-21/sailbot_ws/build/sailbot/build install --prefix /home/luke/sailbot20-21/sailbot_ws/install/sailbot --record /home/luke/sailbot20-21/sailbot_ws/build/sailbot/install.log --single-version-externally-managed
+[0.429s] running egg_info
+[0.430s] writing ../../build/sailbot/sailbot.egg-info/PKG-INFO
+[0.431s] writing dependency_links to ../../build/sailbot/sailbot.egg-info/dependency_links.txt
+[0.432s] writing entry points to ../../build/sailbot/sailbot.egg-info/entry_points.txt
+[0.433s] writing requirements to ../../build/sailbot/sailbot.egg-info/requires.txt
+[0.434s] writing top-level names to ../../build/sailbot/sailbot.egg-info/top_level.txt
+[0.462s] reading manifest file '../../build/sailbot/sailbot.egg-info/SOURCES.txt'
+[0.464s] writing manifest file '../../build/sailbot/sailbot.egg-info/SOURCES.txt'
+[0.464s] running build
+[0.465s] running build_py
+[0.465s] running install
+[0.466s] running install_lib
+[0.467s] running install_data
+[0.468s] copying setup.py -> /home/luke/sailbot20-21/sailbot_ws/install/sailbot/share/sailbot/launch
+[0.468s] running install_egg_info
+[0.470s] removing '/home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/python3.6/site-packages/sailbot-0.0.0-py3.6.egg-info' (and everything under it)
+[0.470s] Copying ../../build/sailbot/sailbot.egg-info to /home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/python3.6/site-packages/sailbot-0.0.0-py3.6.egg-info
+[0.471s] running install_scripts
+[0.486s] Installing control_system script to /home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/sailbot
+[0.488s] Installing pin_io script to /home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/sailbot
+[0.488s] writing list of installed files to '/home/luke/sailbot20-21/sailbot_ws/build/sailbot/install.log'
+[0.513s] Invoked command in '/home/luke/sailbot20-21/sailbot_ws/src/sailbot' returned '0': PYTHONPATH=/home/luke/sailbot20-21/sailbot_ws/install/sailbot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/sailbot build --build-base /home/luke/sailbot20-21/sailbot_ws/build/sailbot/build install --prefix /home/luke/sailbot20-21/sailbot_ws/install/sailbot --record /home/luke/sailbot20-21/sailbot_ws/build/sailbot/install.log --single-version-externally-managed

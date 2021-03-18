@@ -1,18 +1,8 @@
-# Created by https://www.gitignore.io/api/code,platformio
-# Edit at https://www.gitignore.io/?templates=code,platformio
 
-### Code ###
-.vscode/*
-.vscode
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+#Emacs temp saves
+*~
 
-### PlatformIO ###
-.pioenvs
-.piolibdeps
-.clang_complete
-.gcc-flags.json
-
-# End of https://www.gitignore.io/api/code,platformio
+#ROS2 files which shouldn't be tracked
+sailbot_ws/log/*
+sailbot_ws/install/*
+sailbot_ws/build/*
